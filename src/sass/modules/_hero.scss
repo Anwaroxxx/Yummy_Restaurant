@@ -1,187 +1,147 @@
 .hero {
   @include flex(space-between, center);
   background-color: $myBg;
-  padding: 50px 200px;
+  padding: 120px 120px 80px;
+  min-height: 90vh;
   gap: 60px;
 
   .leftHero {
     display: flex;
     flex-direction: column;
-    max-width: 500px;
+    max-width: 600px;
+    gap: 30px;
 
     .description {
       @include myFont();
-      font-size: 25px;
       line-height: 1.1;
       color: rgb(67, 67, 77);
 
       h1 {
-        font-weight: 700;
+        font-size: 64px;
+        font-weight: 800;
+        margin: 0;
+        letter-spacing: -1px;
       }
     }
 
     p {
-      color: rgb(126, 127, 145);
-      font-size: 16px;
-      max-width: 420px;
+      color: #6c757d;
+      font-size: 17px;
+      line-height: 1.6;
+      max-width: 500px;
     }
 
     .Buttons {
       display: flex;
       align-items: center;
-      gap: 25px;
-      margin-top: 15px;
+      gap: 35px;
+      margin-top: 20px;
 
       .bookingBtn {
         @include button($myred);
+        padding: 15px 40px;
+        border-radius: 50px;
+        font-size: 16px;
+        box-shadow: 0 4px 20px rgba(206, 18, 18, 0.25);
+
+        &:hover {
+          background-color: darken($myred, 10%);
+          transform: translateY(-4px);
+          box-shadow: 0 10px 30px rgba(206, 18, 18, 0.35);
+        }
       }
 
       .video {
-        @include flex(center, center, 10px);
+        @include flex(center, center, 12px);
         cursor: pointer;
-        color: rgb(79, 79, 89);
-        font-weight: 500;
-        @include transition(color);
+        font-weight: 600;
+        @include transition(all);
 
         i {
-          font-size: 32px;
+          font-size: 40px;
           color: $myred;
+          @include transition(transform);
+        }
+
+        p {
+          color: #333;
+          font-size: 16px;
+          margin: 0;
         }
 
         &:hover {
-          color: $myred;
-        }
-        
-        p {
-          color: black;
+          i {
+            transform: scale(1.15);
+          }
+          p {
+            color: $myred;
+          }
         }
       }
     }
   }
 
   .rightHero {
+    flex: 1;
+    @include flex(center, center);
+    
     img {
-      width: 500px;
-      animation: float 3s ease-in-out infinite;
+      width: 100%;
+      max-width: 580px;
+      filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.15));
+      animation: float-hero 4s ease-in-out infinite;
     }
   }
 
-  
-  @media (max-width: 900px) {
-    padding: 40px 60px;
-    gap: 40px;
-
-    .leftHero {
-      max-width: 400px;
-
-      .description {
-        font-size: 22px;
-
-        h1 {
-          font-size: 40px;
-        }
-      }
-
-      p {
-        font-size: 15px;
-        max-width: 100%;
-      }
-
-      .Buttons {
-        gap: 20px;
-
-        .bookingBtn {
-          padding: 12px 30px;
-          font-size: 14px;
-        }
-
-        .video {
-          i {
-            font-size: 28px;
-          }
-
-          p {
-            font-size: 14px;
-          }
-        }
-      }
-    }
-
-    .rightHero {
-      img {
-        width: 400px;
-      }
+  @media (max-width: 1200px) {
+    padding: 120px 60px 60px;
+    
+    .leftHero .description h1 {
+      font-size: 54px;
     }
   }
 
-  
-  @media (max-width: 600px) {
+  @media (max-width: 991px) {
     flex-direction: column-reverse;
-    padding: 30px 20px;
-    gap: 30px;
     text-align: center;
+    padding-top: 140px;
+    gap: 50px;
 
     .leftHero {
       max-width: 100%;
       align-items: center;
-
-      .description {
-        font-size: 28px;
-
-        h1 {
-          font-size: 32px;
-        }
-      }
-
-      p {
-        font-size: 14px;
-        max-width: 100%;
-        text-align: center;
-      }
-
-      .Buttons {
-        flex-direction: column;
-        gap: 15px;
-        width: 100%;
-
-        .bookingBtn {
-          width: 100%;
-          padding: 15px;
-          font-size: 16px;
-          text-align: center;
-        }
-
-        .video {
-          justify-content: center;
-
-          i {
-            font-size: 40px;
-          }
-
-          p {
-            font-size: 16px;
-          }
-        }
+      
+      .description h1 {
+        font-size: 48px;
       }
     }
-
-    .rightHero {
-      img {
+    
+    .rightHero img {
+      max-width: 450px;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    padding: 120px 20px 60px;
+    
+    .leftHero .description h1 {
+      font-size: 38px;
+    }
+    
+    .leftHero .Buttons {
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+      
+      .bookingBtn {
         width: 100%;
-        max-width: 350px;
+        text-align: center;
       }
     }
   }
 }
 
-@keyframes float {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-25px);
-  }
-  100% {
-    transform: translateY(0);
-  }
+@keyframes float-hero {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(2deg); }
 }

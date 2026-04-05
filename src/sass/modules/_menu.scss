@@ -1,27 +1,30 @@
 .menu {
-  padding: 60px 100px;
+  padding: 100px 120px;
+  background-color: #fff;
 
   .topMenu {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
 
     .miniMenu {
       text-transform: uppercase;
-      color: #aaa;
+      color: $mygray;
       font-size: 14px;
-      letter-spacing: 2px;
-      margin: 0 0 10px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      margin-bottom: 15px;
     }
 
     h2 {
-      font-size: 36px;
-      color: #333;
+      font-size: 50px;
+      color: #37373f;
       font-weight: 700;
       margin: 0;
       @include myFont();
 
       .red {
         color: $myred;
+        margin-left: 8px;
       }
     }
   }
@@ -30,17 +33,17 @@
     .categories {
       display: flex;
       justify-content: center;
-      gap: 40px;
-      margin-bottom: 30px;
-      border-bottom: 2px solid #e0e0e0;
+      gap: 50px;
+      margin-bottom: 50px;
+      border-bottom: 1px solid #f0f0f0;
 
       div {
-        padding: 12px 20px;
+        padding: 15px 10px;
         cursor: pointer;
-        font-size: 16px;
+        font-size: 17px;
         font-weight: 600;
-        color: #666;
-        transition: color 0.3s ease;
+        color: #7f7f90;
+        transition: all 0.3s ease;
         position: relative;
 
         &:hover {
@@ -49,26 +52,35 @@
 
         &.active {
           color: $myred;
-          border-bottom: 3px solid $myred;
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: $myred;
+          }
         }
       }
     }
 
     .name {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 50px;
 
       p {
         text-transform: uppercase;
-        color: #aaa;
-        font-size: 12px;
-        letter-spacing: 1px;
-        margin: 0 0 5px;
+        color: $mygray;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        margin-bottom: 8px;
       }
 
       .categoriesName {
-        font-size: 28px;
-        color: #333;
+        font-size: 32px;
+        color: #37373f;
         font-weight: 700;
         margin: 0;
 
@@ -81,185 +93,100 @@
     .menuItems {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-      position: relative;
-
+      gap: 50px;
+      
       .items {
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
-        transition: transform 0.3s ease, opacity 0.3s ease;
-        animation: fadeIn 0.5s ease;
-
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        
         &:hover {
           transform: translateY(-10px);
+          
+          .menuImg img {
+            transform: scale(1.1);
+          }
         }
 
         &.hide {
-          opacity: 0;
-          transform: scale(0.8);
-          position: absolute;
-          pointer-events: none;
+          display: none;
         }
 
         .menuImg {
           width: 100%;
-          max-width: 300px;
-          height: 300px;
+          border-radius: 12px;
           overflow: hidden;
-          margin-bottom: 20px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 8px;
+          margin-bottom: 25px;
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 
           img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            height: auto;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
           }
         }
 
         .itemName {
-          font-size: 20px;
-          font-weight: 600;
-          color: #333;
-          margin: 0 0 8px;
+          font-size: 22px;
+          font-weight: 700;
+          color: #37373f;
+          margin-bottom: 10px;
+          @include myFont();
         }
 
         .gray {
-          font-size: 14px;
-          color: #999;
+          font-size: 15px;
+          color: #8d8d9a;
           font-style: italic;
-          margin: 0 0 10px;
+          margin-bottom: 12px;
+          line-height: 1.6;
         }
 
         .price {
-          font-size: 22px;
-          font-weight: 700;
+          font-size: 24px;
+          font-weight: 800;
+          color: $myred;
           margin: 0;
-
-          &.red {
-            color: $myred;
-          }
         }
       }
     }
   }
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+  @media (max-width: 1200px) {
+    padding: 80px 60px;
+    
+    .mainMenuSection .menuItems {
+      gap: 40px;
     }
   }
 
-  @media (max-width: 900px) {
-    padding: 50px 60px;
-
-    .topMenu {
-      margin-bottom: 35px;
-
-      h2 {
-        font-size: 32px;
-      }
-    }
-
+  @media (max-width: 991px) {
     .mainMenuSection {
-      .categories {
-        gap: 30px;
-
-        div {
-          padding: 10px 15px;
-          font-size: 15px;
-        }
-      }
-
-      .name {
-        margin-bottom: 35px;
-
-        .categoriesName {
-          font-size: 26px;
-        }
-      }
-
-      .menuItems {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 35px;
-
-        .items {
-          .menuImg {
-            height: 280px;
-          }
-        }
-      }
+       .menuItems {
+          grid-template-columns: repeat(2, 1fr);
+       }
+       .categories { gap: 30px; }
     }
   }
 
   @media (max-width: 600px) {
-    padding: 40px 20px;
-
-    .topMenu {
-      margin-bottom: 30px;
-
-      .miniMenu {
-        font-size: 12px;
-      }
-
-      h2 {
-        font-size: 28px;
-      }
-    }
-
+    padding: 60px 20px;
+    
+    .topMenu h2 { font-size: 36px; }
+    
     .mainMenuSection {
       .categories {
-        gap: 0;
-        flex-wrap: nowrap;
+        gap: 20px;
         overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
+        padding-bottom: 10px;
         justify-content: flex-start;
-        padding-bottom: 2px;
-
-        &::-webkit-scrollbar {
-          display: none;
-        }
-
-        div {
-          padding: 8px 16px;
-          font-size: 14px;
-          white-space: nowrap;
-          flex-shrink: 0;
-        }
+        div { white-space: nowrap; }
       }
-
-      .name {
-        margin-bottom: 30px;
-
-        .categoriesName {
-          font-size: 24px;
-        }
-      }
-
       .menuItems {
         grid-template-columns: 1fr;
-        gap: 30px;
-
-        .items {
-          &:hover {
-            transform: none;
-          }
-
-          .menuImg {
-            max-width: 100%;
-            height: 250px;
-          }
-        }
       }
     }
   }

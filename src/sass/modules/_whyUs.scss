@@ -1,83 +1,72 @@
 .whyUs {
   display: grid;
-  grid-template-columns: 500px 1fr;
-  gap: 30px;
-  padding-inline: 200px;
+  grid-template-columns: 450px 1fr;
+  gap: 40px;
+  padding: 80px 120px;
   background-color: $myBg;
-  align-items: center;
-  min-height: 500px;
-  padding-block: 60px;
-
+  align-items: stretch;
+  
   .mainCard {
     background-color: $myred;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
-    height: 350px;
-    padding: 40px 30px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 8px;
+    justify-content: center;
+    padding: 50px 40px;
+    box-shadow: 0 15px 40px rgba(207, 19, 19, 0.2);
+    border-radius: 12px;
+    color: white;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
     &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(207, 19, 19, 0.3);
     }
 
     h2 {
-      color: white;
-      font-weight: 700;
-      font-size: 35px;
-      margin-bottom: 15px;
-      text-align: center;
+      font-weight: 800;
+      font-size: 38px;
+      margin-bottom: 20px;
       @include myFont();
     }
 
     p {
       color: rgba(255, 255, 255, 0.9);
       font-size: 16px;
-      text-align: center;
-      margin: 0 0 25px 0;
-      line-height: 1.6;
+      line-height: 1.7;
+      margin: 0 0 30px 0;
     }
 
     .learnMore {
+      align-self: flex-start;
       display: flex;
       align-items: center;
-      justify-content: center;
-      padding: 12px 25px;
-      backdrop-filter: blur(25px) saturate(180%);
-      -webkit-backdrop-filter: blur(25px) saturate(180%);
-      background-color: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      gap: 12px;
+      padding: 12px 30px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 50px;
       cursor: pointer;
       transition: all 0.3s ease;
-      gap: 10px;
       color: white;
 
       p {
         margin: 0;
+        font-weight: 600;
         color: white;
-        transition: color 0.3s ease;
-        font-weight: 500;
       }
 
       i {
-        color: white;
-        transition: color 0.3s ease;
+        font-size: 14px;
+        transition: transform 0.3s;
       }
 
       &:hover {
         background-color: white;
+        transform: scale(1.05);
         color: $myred;
-        transform: translateY(-2px);
-
-        i,
-        p {
-          color: $myred;
-        }
+        p { color: $myred; }
+        i { transform: translateX(5px); color: $myred; }
       }
     }
   }
@@ -90,178 +79,82 @@
 
   .cards {
     background-color: #fff;
-    padding: 30px 25px;
+    padding: 40px 30px;
     text-align: center;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 350px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    @include flex(center, center);
     flex-direction: column;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    cursor: default;
 
     &:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      transform: translateY(-12px);
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.08);
+      
+      .iconContainer {
+        background-color: $myred;
+        color: #fff;
+        transform: rotateY(360deg);
+      }
     }
 
     .iconContainer {
-      width: 60px;
-      height: 60px;
-      margin: 0 auto 20px auto;
+      width: 70px;
+      height: 70px;
+      background-color: rgba(207, 19, 19, 0.05);
+      color: $myred;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 50%;
-      font-size: 28px;
-      background-color: #fff6f6;
-      color: $myred;
-      border: 2px solid $myred;
-      transition: all 0.3s ease;
-    }
-
-    &:hover .iconContainer {
-      background-color: $myred;
-      color: #fff;
-      transform: scale(1.1);
+      font-size: 32px;
+      margin-bottom: 25px;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     h3 {
-      font-size: 18px;
-      font-weight: 600;
-      margin-bottom: 12px;
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 15px;
       color: #333;
     }
 
     p {
-      font-size: 14px;
-      color: #666;
+      font-size: 15px;
+      color: #6c757d;
       line-height: 1.6;
       margin: 0;
     }
   }
 
-  
-  @media (max-width: 900px) {
+  @media (max-width: 1200px) {
+    padding: 60px;
     grid-template-columns: 1fr;
-    padding-inline: 60px;
-    padding-block: 50px;
-    gap: 40px;
-    min-height: auto;
-
+    
     .mainCard {
-      height: auto;
-      padding: 35px 25px;
       max-width: 100%;
-
-      h2 {
-        font-size: 32px;
-      }
-
-      p {
-        font-size: 15px;
-      }
-
-      .learnMore {
-        padding: 10px 20px;
-
-        p {
-          font-size: 14px;
-        }
-      }
-    }
-
-    .cardContainer {
-      grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
-    }
-
-    .cards {
-      height: 320px;
-      padding: 25px 20px;
-
-      .iconContainer {
-        width: 55px;
-        height: 55px;
-        font-size: 26px;
-        margin-bottom: 18px;
-      }
-
-      h3 {
-        font-size: 17px;
-        margin-bottom: 10px;
-      }
-
-      p {
-        font-size: 13px;
-      }
+      text-align: center;
+      align-items: center;
+      .learnMore { align-self: center; }
     }
   }
 
-  
-  @media (max-width: 600px) {
-    grid-template-columns: 1fr;
-    padding-inline: 20px;
-    padding-block: 40px;
-    gap: 30px;
-
-    .mainCard {
-      height: auto;
-      padding: 30px 20px;
-
-      h2 {
-        font-size: 28px;
-        margin-bottom: 12px;
-      }
-
-      p {
-        font-size: 14px;
-        margin-bottom: 20px;
-      }
-
-      .learnMore {
-        padding: 10px 20px;
-        width: 100%;
-        max-width: 200px;
-
-        p {
-          font-size: 14px;
-          margin: 0;
-        }
-      }
+  @media (max-width: 991px) {
+    .cardContainer {
+      grid-template-columns: repeat(2, 1fr);
     }
+  }
 
+  @media (max-width: 600px) {
+    padding: 40px 20px;
+    
     .cardContainer {
       grid-template-columns: 1fr;
-      gap: 20px;
     }
-
-    .cards {
-      height: auto;
-      min-height: 250px;
-      padding: 30px 20px;
-
-      &:hover {
-        transform: translateY(0);
-      }
-
-      .iconContainer {
-        width: 60px;
-        height: 60px;
-        font-size: 28px;
-        margin-bottom: 15px;
-      }
-
-      h3 {
-        font-size: 18px;
-        margin-bottom: 10px;
-      }
-
-      p {
-        font-size: 14px;
-      }
+    
+    .mainCard h2 {
+      font-size: 32px;
     }
   }
 }

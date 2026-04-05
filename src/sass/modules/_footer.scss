@@ -1,69 +1,75 @@
 .footer {
-  background-color: #1a1a1a;
+  background-color: #1f1f24;
   color: #fff;
-  padding: 60px 200px 30px;
+  padding: 80px 120px 40px;
 
   .footer-top {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 40px;
-    padding-bottom: 40px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    margin-bottom: 30px;
+    padding-bottom: 50px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: 40px;
 
     .footer-col {
-      i {
-        color: $myred;
-        font-size: 24px;
-        margin-bottom: 15px;
-        display: block;
-      }
-
-      h4 {
-        font-size: 18px;
-        font-weight: 600;
-        margin: 0 0 15px 0;
-        color: #fff;
+      .footer-icon-box {
+        @include flex(start, center, 12px);
+        margin-bottom: 20px;
+        
+        i {
+          color: $myred;
+          font-size: 22px;
+          margin: 0;
+        }
+        
+        h4 {
+          font-size: 19px;
+          font-weight: 700;
+          margin: 0;
+          color: #fff;
+          @include myFont();
+        }
       }
 
       p {
-        font-size: 14px;
-        color: #aaa;
-        margin: 5px 0;
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.6);
+        margin: 8px 0;
         line-height: 1.6;
 
         strong {
           color: #fff;
-          font-weight: 500;
+          font-weight: 600;
         }
       }
 
       .social {
         display: flex;
-        gap: 10px;
-        margin-top: 10px;
+        gap: 12px;
+        margin-top: 20px;
 
         a {
-          width: 40px;
-          height: 40px;
-          border: 1px solid rgba(255, 255, 255, 0.2);
+          width: 42px;
+          height: 42px;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
           color: #fff;
           text-decoration: none;
-          transition: all 0.3s;
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 
           i {
             font-size: 16px;
-            margin: 0;
           }
 
           &:hover {
             background-color: $myred;
             border-color: $myred;
-            transform: translateY(-3px);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 5px 15px rgba($myred, 0.4);
           }
         }
       }
@@ -75,8 +81,8 @@
 
     p {
       font-size: 14px;
-      color: #aaa;
-      margin: 5px 0;
+      color: rgba(255, 255, 255, 0.5);
+      margin: 6px 0;
 
       strong {
         color: #fff;
@@ -86,24 +92,22 @@
       a {
         color: $myred;
         text-decoration: none;
-        font-weight: 500;
-        transition: color 0.3s;
+        font-weight: 600;
+        transition: all 0.3s;
 
         &:hover {
-          color: lighten($myred, 10%);
-          text-decoration: underline;
+          color: #fff;
         }
       }
     }
   }
 
-  
-  @media (max-width: 1024px) {
-    padding: 60px 100px 30px;
-
+  @media (max-width: 1200px) {
+    padding: 80px 60px 40px;
+    
     .footer-top {
       grid-template-columns: repeat(2, 1fr);
-      gap: 30px;
+      gap: 50px;
     }
   }
 
@@ -112,7 +116,16 @@
 
     .footer-top {
       grid-template-columns: 1fr;
-      gap: 30px;
+      gap: 40px;
+      text-align: center;
+      
+      .footer-icon-box {
+        justify-content: center;
+      }
+      
+      .social {
+        justify-content: center;
+      }
     }
   }
 }

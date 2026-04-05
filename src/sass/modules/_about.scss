@@ -1,28 +1,30 @@
 .About {
-  padding: 50px 0;
+  padding: 100px 0;
+  background-color: #fff;
 
   .topAbout {
-    @include flex(center, center);
-    flex-direction: column;
-    margin-bottom: 60px;
     text-align: center;
+    margin-bottom: 70px;
     padding: 0 20px;
 
     .miniAbout {
-      color: rgb(126, 127, 145);
-      font-size: 14px;
-      letter-spacing: 2px;
+      color: $mygray;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
     }
 
     h2 {
       @include myFont();
-      font-size: 48px;
-      color: rgb(55, 55, 64);
+      font-size: 50px;
+      color: #37373f;
+      margin: 0;
 
       .red {
         color: $myred;
+        margin-left: 8px;
       }
     }
   }
@@ -30,35 +32,49 @@
   .mainAboutSection {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    padding-inline: 200px;
-    align-items: center;
-    gap: 20px;
+    padding: 0 120px;
+    align-items: flex-start;
+    gap: 60px;
 
     .leftAbout {
+      position: relative;
+      
       .aboutPic {
         img {
-          width: 91.7%;
+          width: 100%;
+          border-radius: 15px;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
       }
 
       .number {
+        position: absolute;
+        bottom: -30px;
+        right: -20px;
         background: #fff;
-        border: 3px solid $mygray;
-        padding: 40px 40px;
+        padding: 35px 45px;
         text-align: center;
-        width: 80%;
+        border-radius: 12px;
+        box-shadow: 0 15px 45px rgba(0, 0, 0, 0.12);
+        z-index: 10;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+        &:hover {
+          transform: scale(1.05);
+        }
 
         p {
-          color: rgb(0, 0, 0);
-          font-size: 20px;
-          font-weight: bold;
+          color: #37373f;
+          font-size: 18px;
+          font-weight: 700;
+          margin-bottom: 5px;
         }
 
         .red {
           color: $myred;
-          font-size: 26px;
-          font-weight: 700;
-          margin-top: 5px;
+          font-size: 28px;
+          font-weight: 800;
+          margin: 0;
         }
       }
     }
@@ -66,203 +82,126 @@
     .rightAbout {
       display: flex;
       flex-direction: column;
-      width: 550px;
+      gap: 30px;
 
       .paraAbout {
-        display: flex;
-        flex-direction: column;
-
         .gray {
-          color: rgb(126, 127, 145);
+          color: #5f5f6a;
           font-style: italic;
-        }
-
-        p {
-          color: rgb(79, 79, 89);
-          font-size: 15px;
+          font-size: 17px;
+          line-height: 1.7;
+          margin-bottom: 25px;
+          display: block;
         }
 
         .iconAbout {
-          display: flex;
-          align-items: center;
-          gap: 10px;
+          @include flex(start, flex-start, 12px);
+          margin-bottom: 18px;
 
           i {
             color: $myred;
-            font-size: 18px;
-            margin-top: 4px;
+            font-size: 20px;
+            margin-top: 2px;
           }
+
+          p {
+            color: #37373f;
+            font-size: 16px;
+            line-height: 1.5;
+            margin: 0;
+          }
+        }
+        
+        > p {
+           color: #5f5f6a;
+           font-size: 16px;
+           line-height: 1.7;
+           margin-top: 10px;
         }
       }
 
       .vidAbout {
         position: relative;
+        overflow: hidden;
+        border-radius: 15px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 
         img {
           width: 550px;
+          max-width: 100%;
+          display: block;
+          transition: transform 0.5s;
+        }
+        
+        &:hover img {
+          transform: scale(1.05);
         }
       }
     }
   }
 
-  
-  @media (max-width: 900px) {
-    padding: 40px 0;
-
-    .topAbout {
-      margin-bottom: 40px;
-
-      h2 {
-        font-size: 40px;
-      }
-    }
-
+  @media (max-width: 1200px) {
+    padding: 80px 0;
     .mainAboutSection {
-      padding-inline: 60px;
+      padding: 0 60px;
       gap: 40px;
-
-      .leftAbout {
-        .aboutPic {
-          img {
-            width: 100%;
-          }
-        }
-
-        .number {
-          width: 90%;
-          padding: 30px;
-
-          p {
-            font-size: 18px;
-          }
-
-          .red {
-            font-size: 24px;
-          }
-        }
-      }
-
-      .rightAbout {
-        width: 100%;
-
-        .paraAbout {
-          p {
-            font-size: 14px;
-          }
-        }
-
-        .vidAbout {
-          img {
-            width: 100%;
-          }
-        }
-      }
     }
   }
 
-  
-  @media (max-width: 600px) {
-    padding: 30px 0;
-
-    .topAbout {
-      margin-bottom: 30px;
-
-      .miniAbout {
-        font-size: 12px;
-      }
-
-      h2 {
-        font-size: 32px;
-      }
-    }
-
+  @media (max-width: 900px) {
     .mainAboutSection {
       grid-template-columns: 1fr;
-      padding-inline: 20px;
-      gap: 30px;
-
+      text-align: center;
+      
       .leftAbout {
         order: 2;
-
-        .aboutPic {
-          img {
-            width: 100%;
-          }
-        }
-
         .number {
-          width: 100%;
-          padding: 25px;
-          margin-top: 20px;
-
-          p {
-            font-size: 16px;
-          }
-
-          .red {
-            font-size: 22px;
-          }
+          right: 50%;
+          transform: translateX(50%);
+          bottom: -20px;
+          width: 80%;
+          &:hover { transform: translateX(50%) scale(1.05); }
         }
       }
-
+      
       .rightAbout {
         order: 1;
-        width: 100%;
-
-        .paraAbout {
-          .gray {
-            font-size: 14px;
-          }
-
-          p {
-            font-size: 14px;
-          }
-
-          .iconAbout {
-            i {
-              font-size: 16px;
-            }
-          }
-        }
-
-        .vidAbout {
-          margin-top: 20px;
-
-          img {
-            width: 100%;
-          }
-        }
+        .paraAbout .iconAbout { justify-content: center; text-align: left; }
       }
     }
+  }
+
+  @media (max-width: 600px) {
+    padding: 60px 0;
+    .topAbout h2 { font-size: 36px; }
+    .mainAboutSection { padding: 0 20px; }
   }
 }
 
 .iconPlay {
   cursor: pointer;
   position: absolute;
-  right: 40%;
-  top: 40%;
-  width: 100px;
-  height: 100px;
+  right: 50%;
+  top: 50%;
+  transform: translate(50%, -50%);
+  width: 90px;
+  height: 90px;
   background-color: $myred;
   border-radius: 50%;
   @include myDisplayFlex();
-  box-shadow: 0 0 0 rgba($myred, 0.6);
-  animation: pulse 2s infinite;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 10px 30px rgba($myred, 0.3);
+  z-index: 20;
+  transition: all 0.3s;
 
   i {
     color: white;
-    font-size: 50px;
+    font-size: 40px;
+    margin-left: 5px; // Center the triangle better
   }
 
   &:hover {
-    transform: scale(1.1);
-    box-shadow: 0 15px 35px rgba($myred, 0.5);
-  }
-
-  &:active {
-    transform: scale(0.95);
+    transform: translate(50%, -50%) scale(1.1);
+    background-color: darken($myred, 5%);
   }
 
   &::before {
@@ -270,65 +209,12 @@
     position: absolute;
     inset: -15px;
     border-radius: 50%;
-    border: 2px solid rgba($myred, 0.6);
+    border: 2px solid rgba($myred, 0.4);
     animation: ripple 2s infinite;
-  }
-
-  // Tablet
-  @media (max-width: 900px) {
-    width: 80px;
-    height: 80px;
-
-    i {
-      font-size: 40px;
-    }
-  }
-
-  
-  @media (max-width: 600px) {
-    width: 70px;
-    height: 70px;
-    right: 50%;
-    top: 50%;
-    transform: translate(50%, -50%);
-
-    i {
-      font-size: 35px;
-    }
-
-    &:hover {
-      transform: translate(50%, -50%) scale(1.1);
-    }
-
-    &:active {
-      transform: translate(50%, -50%) scale(0.95);
-    }
-
-    &::before {
-      inset: -10px;
-    }
-  }
-}
-
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0 rgba($myred, 0.6);
-  }
-  70% {
-    box-shadow: 0 0 0 25px rgba($myred, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba($myred, 0);
   }
 }
 
 @keyframes ripple {
-  0% {
-    transform: scale(0.9);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1.3);
-    opacity: 0;
-  }
+  0% { transform: scale(0.9); opacity: 1; }
+  100% { transform: scale(1.4); opacity: 0; }
 }

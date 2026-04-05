@@ -70,12 +70,10 @@ categoryBtns.forEach(btn => {
   const total = dots.length;
   let cur = 0, busy = false, timer;
 
-  dots[0].classList.add('active');
-
   function go(n) {
     if (busy) return;
     busy = true;
-    cur = ((n % total) + total) % total;
+    cur = (n + total) % total;
     track.style.transform = `translateX(-${cur * 100}%)`;
     dots.forEach((d, i) => d.classList.toggle('active', i === cur));
     setTimeout(() => { busy = false; }, 600);
@@ -83,12 +81,15 @@ categoryBtns.forEach(btn => {
 
   function reset() {
     clearInterval(timer);
-    timer = setInterval(() => go(cur + 1), 5000);
+    timer = setInterval(() => go(cur + 1), 6000);
   }
 
   dots.forEach((d, i) => d.addEventListener('click', () => { go(i); reset(); }));
-  track.addEventListener('mouseenter', () => clearInterval(timer));
-  track.addEventListener('mouseleave', reset);
+  root.addEventListener('mouseenter', () => clearInterval(timer));
+  root.addEventListener('mouseleave', reset);
+  
+  // Initial state
+  if (dots.length > 0) dots[0].classList.add('active');
   reset();
 })();
 
@@ -100,30 +101,67 @@ function multiCarousel(selector, delay) {
   const slides = root.querySelectorAll('.slide');
   const dots = root.querySelectorAll('.dot');
   let idx = 0;
+  let timer;
 
-  function visible() {
+  function getVisibleCount() {
     if (window.innerWidth <= 768) return 1;
     if (window.innerWidth <= 1024) return 2;
     return 3;
   }
 
-  function slideW() {
-    return slides[0].offsetWidth + (parseFloat(getComputedStyle(track).gap) || 0);
-  }
-
   function update() {
-    track.style.transform = `translateX(-${idx * slideW()}px)`;
-    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    const visibleCount = getVisibleCount();
+    const maxIdx = Math.max(0, slides.length - visibleCount);
+    if (idx > maxIdx) idx = maxIdx;
+
+    const slide = slides[0];
+    if (!slide) return;
+    
+    const gap = parseFloat(getComputedStyle(track).gap) || 0;
+    const slideW = slide.offsetWidth + gap;
+    
+    track.style.transform = `translateX(-${idx * slideW}px)`;
+    
+    // Update dots - only highlight the one corresponding to current first visible slide
+    dots.forEach((d, i) => {
+      d.classList.toggle('active', i === idx);
+      // Hide dots that would lead to empty space at the end
+      if (i > maxIdx) {
+        d.style.display = 'none';
+      } else {
+        d.style.display = 'block';
+      }
+    });
   }
 
-  dots.forEach((d, i) => d.addEventListener('click', () => { idx = i; update(); }));
-
-  setInterval(() => {
-    idx = idx >= slides.length - visible() ? 0 : idx + 1;
+  function next() {
+    const visibleCount = getVisibleCount();
+    const maxIdx = Math.max(0, slides.length - visibleCount);
+    idx = (idx >= maxIdx) ? 0 : idx + 1;
     update();
-  }, delay);
+  }
+
+  function startTimer() {
+    clearInterval(timer);
+    timer = setInterval(next, delay);
+  }
+
+  dots.forEach((d, i) => {
+    d.addEventListener('click', () => {
+      idx = i;
+      update();
+      startTimer();
+    });
+  });
+
+  root.addEventListener('mouseenter', () => clearInterval(timer));
+  root.addEventListener('mouseleave', startTimer);
 
   window.addEventListener('resize', update);
+  
+  // Initialize
+  setTimeout(update, 100); // Small delay to ensure layout is ready
+  startTimer();
 }
 
 multiCarousel('.events', 5000);
@@ -194,16 +232,38 @@ form?.addEventListener('submit', e => {
 });
 
 const scrollBtn = document.getElementById('scrollTop');
+const nav = document.querySelector('nav');
+const progressBar = document.getElementById('scrollProgress');
+
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  const height = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = (scrollY / height) * 100;
+  
+  if (progressBar) progressBar.style.width = `${progress}%`;
+  
+  if (scrollBtn) {
+    scrollBtn.classList.toggle('visible', scrollY > 400);
+  }
+  
+  if (nav) {
+    nav.classList.toggle('scrolled', scrollY > 50);
+  }
+});
+
 if (scrollBtn) {
-  window.addEventListener('scroll', () => {
-    scrollBtn.classList.toggle('visible', window.scrollY > 400);
-  });
   scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
 
 const revealObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-}, { threshold: 0.1 });
+  entries.forEach(entry => { 
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      // Once visible, no need to observe anymore for a smoother performance
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
@@ -228,7 +288,7 @@ if (contactForm) {
   sendBtn?.addEventListener('click', e => {
     e.preventDefault();
     const name = contactForm.querySelector('.nameInput').value.trim();
-    const email = contactForm.querySelector('.emailINput').value.trim();
+    const email = contactForm.querySelector('.emailInput').value.trim();
     const subject = contactForm.querySelector('.subjectInput').value.trim();
     const message = contactForm.querySelector('textarea').value.trim();
 
