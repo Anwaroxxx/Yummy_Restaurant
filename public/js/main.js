@@ -1,378 +1,243 @@
-//!counter dial statistics section
-const counters = document.querySelectorAll(".stats h2");
-const section = document.querySelector(".statistics");
-
-let started = false;
-
-function startCounters() {
-  counters.forEach((counter) => {
-    let target = parseInt(counter.textContent);
-    let count = 0;
-    counter.textContent = 0;
-
-    const interval = setInterval(() => {
-      count++;
-      counter.textContent = count;
-
-      if (count === target) {
-        clearInterval(interval);
-      }
-    }, 1);
-  });
+function toast(msg, type = 'success') {
+  const container = document.getElementById('toastContainer');
+  const el = document.createElement('div');
+  el.className = `toast toast--${type}`;
+  el.textContent = msg;
+  container.appendChild(el);
+  setTimeout(() => el.classList.add('show'), 10);
+  setTimeout(() => {
+    el.classList.remove('show');
+    setTimeout(() => el.remove(), 300);
+  }, 3500);
 }
 
-window.addEventListener("scroll", () => {
-  const sectionTop = section.getBoundingClientRect().top;
-  const screenHeight = window.innerHeight;
-
-  if (sectionTop < screenHeight && !started) {
-    started = true;
-    startCounters();
+function animateCount(el, target) {
+  const startTime = performance.now();
+  const duration = 2000;
+  function step(now) {
+    const p = Math.min((now - startTime) / duration, 1);
+    el.textContent = Math.floor((1 - Math.pow(1 - p, 3)) * target);
+    if (p < 1) requestAnimationFrame(step);
+    else el.textContent = target;
   }
-});
+  requestAnimationFrame(step);
+}
 
-//!Menu JS
-const startersBtn = document.querySelector(".categories .starters");
-const breakfastBtn = document.querySelector(".categories .breakfast");
-const lunchBtn = document.querySelector(".categories .lunch");
-const dinnerBtn = document.querySelector(".categories .dinner");
-const categoryName = document.querySelector(".categoriesName span");
-const allItems = document.querySelectorAll(".menuItems .items");
+const counters = document.querySelectorAll('.stats h2');
+const statsSection = document.querySelector('.statistics');
+let statsStarted = false;
 
-startersBtn.addEventListener("click", () => {
-  startersBtn.classList.add("active");
-  breakfastBtn.classList.remove("active");
-  lunchBtn.classList.remove("active");
-  dinnerBtn.classList.remove("active");
-  categoryName.textContent = "STARTERS";
-
-  allItems.forEach((item) => {
-    item.classList.remove("hide");
-    item.style.display = "flex";
-  });
-});
-
-breakfastBtn.addEventListener("click", () => {
-  startersBtn.classList.remove("active");
-  breakfastBtn.classList.add("active");
-  lunchBtn.classList.remove("active");
-  dinnerBtn.classList.remove("active");
-  categoryName.textContent = "BREAKFAST";
-
-  allItems.forEach((item) => {
-    if (item.classList.contains("breakfast")) {
-      item.classList.remove("hide");
-      item.style.display = "flex";
-    } else {
-      item.classList.add("hide");
-      setTimeout(() => (item.style.display = "none"), 300);
+if (statsSection) {
+  new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting && !statsStarted) {
+      statsStarted = true;
+      counters.forEach(el => animateCount(el, parseInt(el.textContent)));
     }
-  });
-});
+  }, { threshold: 0.4 }).observe(statsSection);
+}
 
-lunchBtn.addEventListener("click", () => {
-  startersBtn.classList.remove("active");
-  breakfastBtn.classList.remove("active");
-  lunchBtn.classList.add("active");
-  dinnerBtn.classList.remove("active");
-  categoryName.textContent = "LUNCH";
+const categoryBtns = document.querySelectorAll('.categories div');
+const menuItems = document.querySelectorAll('.menuItems .items');
+const categoryTitle = document.querySelector('.categoriesName span');
 
-  allItems.forEach((item) => {
-    if (item.classList.contains("lunch")) {
-      item.classList.remove("hide");
-      item.style.display = "flex";
-    } else {
-      item.classList.add("hide");
-      setTimeout(() => (item.style.display = "none"), 300);
-    }
-  });
-});
+categoryBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    categoryBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
 
-dinnerBtn.addEventListener("click", () => {
-  startersBtn.classList.remove("active");
-  breakfastBtn.classList.remove("active");
-  lunchBtn.classList.remove("active");
-  dinnerBtn.classList.add("active");
-  categoryName.textContent = "DINNER";
+    const cat = btn.dataset.category;
+    categoryTitle.textContent = cat === 'all' ? 'STARTERS' : cat.toUpperCase();
 
-  allItems.forEach((item) => {
-    if (item.classList.contains("dinner")) {
-      item.classList.remove("hide");
-      item.style.display = "flex";
-    } else {
-      item.classList.add("hide");
-      setTimeout(() => (item.style.display = "none"), 300);
-    }
-  });
-});
-
-//!Testimonials carousel js
-const testimonialsTrack = document.querySelector(".testimonials .track");
-const testimonialsSlides = document.querySelectorAll(".testimonials .slide");
-const testimonialsDots = document.querySelectorAll(".testimonials .dot");
-let currentTestimonialSlide = 0;
-const totalTestimonialSlides = testimonialsSlides.length;
-let autoTestimonialInterval;
-let isTransitioning = false;
-
-
-if (testimonialsTrack && testimonialsSlides.length > 0) {
-  testimonialsDots[0].classList.add("active");
-
-  testimonialsDots.forEach((dot, index) => {
-    dot.addEventListener("click", () => {
-      if (isTransitioning) return;
-      currentTestimonialSlide = index;
-      updateTestimonialCarousel();
-      resetTestimonialAutoSlide();
+    menuItems.forEach(item => {
+      const show = cat === 'all' || item.dataset.category === cat;
+      if (show) {
+        item.classList.remove('hide');
+        item.style.display = 'flex';
+      } else {
+        item.classList.add('hide');
+        setTimeout(() => { if (item.classList.contains('hide')) item.style.display = 'none'; }, 300);
+      }
     });
   });
-
-  function updateTestimonialCarousel() {
-    isTransitioning = true;
-    const offset = currentTestimonialSlide * 100;
-    testimonialsTrack.style.transform = `translateX(-${offset}%)`;
-
-    testimonialsDots.forEach((dot) => dot.classList.remove("active"));
-    testimonialsDots[currentTestimonialSlide].classList.add("active");
-
-    setTimeout(() => {
-      isTransitioning = false;
-    }, 600); 
-  }
-
-  function autoTestimonialSlide() {
-    if (isTransitioning) return;
-    
-    if (currentTestimonialSlide >= totalTestimonialSlides - 1) {
-      currentTestimonialSlide = 0;
-    } else {
-      currentTestimonialSlide++;
-    }
-    updateTestimonialCarousel();
-  }
-
-  function resetTestimonialAutoSlide() {
-    clearInterval(autoTestimonialInterval);
-    autoTestimonialInterval = setInterval(autoTestimonialSlide, 5000);
-  }
-
-
-  autoTestimonialInterval = setInterval(autoTestimonialSlide, 5000);
-
-  testimonialsTrack.addEventListener('mouseenter', () => {
-    clearInterval(autoTestimonialInterval);
-  });
-
-  testimonialsTrack.addEventListener('mouseleave', () => {
-    autoTestimonialInterval = setInterval(autoTestimonialSlide, 5000);
-  });
-}
-
-//!Events Carosel
-const track = document.querySelector(".events .track");
-const slides = document.querySelectorAll(".events .slide");
-const dots = document.querySelectorAll(".events .dot");
-
-let index = 0;
-
-function getSlideWidth() {
-  const slide = slides[0];
-  const gap = parseFloat(getComputedStyle(track).gap) || 0;
-  return slide.offsetWidth + gap;
-}
-
-function getVisibleSlides() {
-  if (window.innerWidth <= 768) return 1;
-  if (window.innerWidth <= 1024) return 2;
-  return 3;
-}
-
-function updateCarousel() {
-  const slideWidth = getSlideWidth();
-  track.style.transform = `translateX(-${index * slideWidth}px)`;
-
-  dots.forEach((dot) => dot.classList.remove("active"));
-  dots[index].classList.add("active");
-}
-
-dots.forEach((dot, i) => {
-  dot.addEventListener("click", () => {
-    index = i;
-    updateCarousel();
-  });
 });
 
-setInterval(() => {
-  const maxIndex = slides.length - getVisibleSlides();
+(function testimonialsCarousel() {
+  const root = document.querySelector('.testimonials');
+  if (!root) return;
 
-  index++;
+  const track = root.querySelector('.track');
+  const dots = root.querySelectorAll('.dot');
+  const total = dots.length;
+  let cur = 0, busy = false, timer;
 
-  if (index > maxIndex) {
-    index = 0;
+  dots[0].classList.add('active');
+
+  function go(n) {
+    if (busy) return;
+    busy = true;
+    cur = ((n % total) + total) % total;
+    track.style.transform = `translateX(-${cur * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === cur));
+    setTimeout(() => { busy = false; }, 600);
   }
 
-  updateCarousel();
-}, 5000);
-
-window.addEventListener("resize", updateCarousel);
-//!Socials appearness in the chef section
-const chefCards = document.querySelectorAll(".chefItems");
-
-chefCards.forEach((card) => {
-  const socials = card.querySelector(".socials");
-
-  card.addEventListener("mouseenter", () => {
-    socials.classList.add("show");
-  });
-
-  card.addEventListener("mouseleave", () => {
-    socials.classList.remove("show");
-  });
-});
-
-//!Gallery carossel 
-//!Gallery carousel
-const galleryTrack = document.querySelector(".gallery .track");
-const gallerySlides = document.querySelectorAll(".gallery .slide");
-const galleryDots = document.querySelectorAll(".gallery .dot");
-
-let galleryIndex = 0;
-let galleryAutoInterval;
-
-
-if (galleryTrack && gallerySlides.length > 0) {
-  galleryDots[0].classList.add("active");
-
-  function getGallerySlideWidth() {
-    const slide = gallerySlides[0];
-    const gap = parseFloat(getComputedStyle(galleryTrack).gap) || 0;
-    return slide.offsetWidth + gap;
+  function reset() {
+    clearInterval(timer);
+    timer = setInterval(() => go(cur + 1), 5000);
   }
 
-  function getGalleryVisibleSlides() {
+  dots.forEach((d, i) => d.addEventListener('click', () => { go(i); reset(); }));
+  track.addEventListener('mouseenter', () => clearInterval(timer));
+  track.addEventListener('mouseleave', reset);
+  reset();
+})();
+
+function multiCarousel(selector, delay) {
+  const root = document.querySelector(selector);
+  if (!root) return;
+
+  const track = root.querySelector('.track');
+  const slides = root.querySelectorAll('.slide');
+  const dots = root.querySelectorAll('.dot');
+  let idx = 0;
+
+  function visible() {
     if (window.innerWidth <= 768) return 1;
     if (window.innerWidth <= 1024) return 2;
     return 3;
   }
 
-  function updateGalleryCarousel() {
-    const slideWidth = getGallerySlideWidth();
-    galleryTrack.style.transform = `translateX(-${galleryIndex * slideWidth}px)`;
-
-    galleryDots.forEach((dot) => dot.classList.remove("active"));
-    galleryDots[galleryIndex].classList.add("active");
+  function slideW() {
+    return slides[0].offsetWidth + (parseFloat(getComputedStyle(track).gap) || 0);
   }
 
-  galleryDots.forEach((dot, i) => {
-    dot.addEventListener("click", () => {
-      galleryIndex = i;
-      updateGalleryCarousel();
-      resetGalleryAutoSlide();
-    });
-  });
-
-  function autoGallerySlide() {
-    const maxIndex = gallerySlides.length - getGalleryVisibleSlides();
-
-    galleryIndex++;
-
-    if (galleryIndex > maxIndex) {
-      galleryIndex = 0;
-    }
-
-    updateGalleryCarousel();
+  function update() {
+    track.style.transform = `translateX(-${idx * slideW()}px)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
   }
 
-  function resetGalleryAutoSlide() {
-    clearInterval(galleryAutoInterval);
-    galleryAutoInterval = setInterval(autoGallerySlide, 3000);
-  }
+  dots.forEach((d, i) => d.addEventListener('click', () => { idx = i; update(); }));
 
-  galleryAutoInterval = setInterval(autoGallerySlide, 3000);
+  setInterval(() => {
+    idx = idx >= slides.length - visible() ? 0 : idx + 1;
+    update();
+  }, delay);
 
-  window.addEventListener("resize", updateGalleryCarousel);
+  window.addEventListener('resize', update);
 }
 
-//!Modal when i click on the button
-const modal = document.getElementById('reservationModal');
-const closeBtn = document.querySelector('.close');
-const form = document.getElementById('reservationForm');
-const bookingBtns = document.querySelectorAll('.bookingBtn');
+multiCarousel('.events', 5000);
+multiCarousel('.gallery', 3000);
 
-//*To store reservations in memory
+document.querySelectorAll('.chefItems').forEach(card => {
+  const socials = card.querySelector('.socials');
+  card.addEventListener('mouseenter', () => socials.classList.add('show'));
+  card.addEventListener('mouseleave', () => socials.classList.remove('show'));
+});
+
+const modal = document.getElementById('reservationModal');
+const form = document.getElementById('reservationForm');
 let reservations = [];
 
-//?check if time slots overlap
-
-function hasTimeConflict(newStart, newEnd) {
-  const newStartTime = new Date(`1970-01-01T${newStart}`).getTime();
-  const newEndTime = new Date(`1970-01-01T${newEnd}`).getTime();
-  
-  for (let reservation of reservations) {
-    const existingStart = new Date(`1970-01-01T${reservation.startTime}`).getTime();
-    const existingEnd = new Date(`1970-01-01T${reservation.endTime}`).getTime();
-    
-    //*Check if times overlap
-    if (
-      (newStartTime >= existingStart && newStartTime < existingEnd) ||
-      (newEndTime > existingStart && newEndTime <= existingEnd) ||
-      (newStartTime <= existingStart && newEndTime >= existingEnd)
-    ) {
-      return true;
-    }
-  }
-  
-  return false;
+function openModal() {
+  modal.style.display = 'block';
+  document.body.style.overflow = 'hidden';
 }
 
-bookingBtns.forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    e.preventDefault();
-    modal.style.display = 'block';
-  });
-});
-
-closeBtn.addEventListener('click', () => {
+function closeModal() {
   modal.style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.bookingBtn').forEach(btn => {
+  btn.addEventListener('click', e => { e.preventDefault(); openModal(); });
 });
 
-window.addEventListener('click', (e) => {
-  if (e.target === modal) {
-    modal.style.display = 'none';
-  }
-});
+document.querySelector('.close')?.addEventListener('click', closeModal);
+window.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-form.addEventListener('submit', (e) => {
+function hasConflict(s, e) {
+  const ns = +new Date(`1970-01-01T${s}`);
+  const ne = +new Date(`1970-01-01T${e}`);
+  return reservations.some(r => {
+    const rs = +new Date(`1970-01-01T${r.startTime}`);
+    const re = +new Date(`1970-01-01T${r.endTime}`);
+    return ns < re && ne > rs;
+  });
+}
+
+form?.addEventListener('submit', e => {
   e.preventDefault();
-  
-  const formData = {
+  const data = {
     fullName: document.getElementById('fullName').value,
     foodOption: document.getElementById('foodOption').value,
     startTime: document.getElementById('startTime').value,
     endTime: document.getElementById('endTime').value,
     numPeople: document.getElementById('numPeople').value
   };
-  //TODO => handling all edge cases like time conflicts and start time khass ykon 9bel mn end time
-  //* Validate end time is after start time
-  if (formData.startTime >= formData.endTime) {
-    alert('End time must be after start time!');
+
+  if (data.startTime >= data.endTime) {
+    toast('End time must be after start time.', 'error');
     return;
   }
-  
-  //* Check for time conflicts
-  if (hasTimeConflict(formData.startTime, formData.endTime)) {
-    alert('Sorry, this time slot is already reserved. Please choose a different time.');
+
+  if (hasConflict(data.startTime, data.endTime)) {
+    toast('Time slot already reserved. Pick a different time.', 'error');
     return;
   }
-  
-  //* Add to reservations array
-  reservations.push(formData);
-  
-  console.log('Reservation Data:', formData);
-  console.log('All Reservations:', reservations);
-  alert('Reservation submitted successfully!');
-  
+
+  reservations.push(data);
+  toast(`Reservation confirmed for ${data.fullName}!`);
   form.reset();
-  modal.style.display = 'none';
+  closeModal();
 });
+
+const scrollBtn = document.getElementById('scrollTop');
+if (scrollBtn) {
+  window.addEventListener('scroll', () => {
+    scrollBtn.classList.toggle('visible', window.scrollY > 400);
+  });
+  scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+const allNavLinks = document.querySelectorAll('nav .links a[href^="#"]');
+const allSections = document.querySelectorAll('section[id], main[id]');
+
+const sectionObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      allNavLinks.forEach(l => l.classList.remove('default'));
+      const active = document.querySelector(`nav .links a[href="#${entry.target.id}"]`);
+      if (active) active.classList.add('default');
+    }
+  });
+}, { threshold: 0.4 });
+
+allSections.forEach(s => sectionObserver.observe(s));
+
+const contactForm = document.querySelector('.contact .forms');
+if (contactForm) {
+  const sendBtn = contactForm.querySelector('.sendBtn');
+  sendBtn?.addEventListener('click', e => {
+    e.preventDefault();
+    const name = contactForm.querySelector('.nameInput').value.trim();
+    const email = contactForm.querySelector('.emailINput').value.trim();
+    const subject = contactForm.querySelector('.subjectInput').value.trim();
+    const message = contactForm.querySelector('textarea').value.trim();
+
+    if (!name || !email || !subject || !message) {
+      toast('Please fill in all fields.', 'error');
+      return;
+    }
+
+    toast('Message sent successfully!');
+    contactForm.querySelectorAll('input, textarea').forEach(el => el.value = '');
+  });
+}

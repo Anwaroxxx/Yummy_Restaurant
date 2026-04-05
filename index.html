@@ -11,16 +11,17 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <link rel="icon" type="image/png" href="./public/images/favicon/download.jpg">   
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <title>Document</title>
+    <title>Yummy — Restaurant</title>
   </head>
   <body>
-    <!--!NAVBAR-->
+
     <nav>
       <div class="logo">
         <h2>Yummy<span class="red">.</span></h2>
@@ -33,18 +34,17 @@
       <div class="links">
         <a href="#home" class="link default">Home</a>
         <a href="#about" class="link">About</a>
-        <a href="menu#" class="link">Menu</a>
+        <a href="#menu" class="link">Menu</a>
         <a href="#events" class="link">Events</a>
         <a href="#chefs" class="link">Chefs</a>
         <a href="#gallery" class="link">Gallery</a>
-        <a href="" class="link">Dropdown </a>
         <a href="#contact" class="link">Contact</a>
       </div>
       <div class="booking">
         <a href="" class="bookingBtn">Book a Table</a>
       </div>
     </nav>
-    <!--!HERO-->
+
     <main class="hero" id="home">
       <div class="leftHero">
         <div class="description">
@@ -61,26 +61,26 @@
         </div>
       </div>
       <div class="rightHero">
-        <img src="/public/images/hero-img.png" alt="" />
+        <img src="/public/images/hero-img.png" alt="hero food" loading="lazy" />
       </div>
     </main>
-    <!--!ABOUT US-->
-    <section class="About">
-      <div class="topAbout">
+
+    <section class="About" id="about">
+      <div class="topAbout reveal">
         <p class="miniAbout">About us</p>
         <h2>LEARN MORE <span class="red">ABOUT US</span></h2>
       </div>
       <div class="mainAboutSection">
-        <div class="leftAbout">
+        <div class="leftAbout reveal">
           <div class="aboutPic">
-            <img src="./public/images/about.jpg" alt="" />
+            <img src="./public/images/about.jpg" alt="about" loading="lazy" />
           </div>
           <div class="number">
             <p>Book a Table</p>
             <p class="red">+1 5589 55488 55</p>
           </div>
         </div>
-        <div class="rightAbout">
+        <div class="rightAbout reveal">
           <div class="paraAbout">
             <p class="gray">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -113,14 +113,14 @@
             <div class="iconPlay">
               <i class="fa-regular fa-circle-play"></i>
             </div>
-            <img src="./public/images/about-2.jpg" alt="" />
+            <img src="./public/images/about-2.jpg" alt="about video" loading="lazy" />
           </div>
         </div>
       </div>
     </section>
-    <!--!WHY-US-->
+
     <section class="whyUs">
-      <div class="mainCard">
+      <div class="mainCard reveal">
         <h2>Why choose Yummy</h2>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -134,39 +134,30 @@
         </div>
       </div>
       <div class="cardContainer">
-        <div class="cards">
+        <div class="cards reveal">
           <div class="iconContainer">
             <i class="fa-solid fa-clipboard-list"></i>
           </div>
           <h3>Corporis voluptates officia eiusmod</h3>
-          <p>
-            Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris
-            nisi ut aliquip
-          </p>
+          <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
         </div>
-        <div class="cards">
+        <div class="cards reveal">
           <div class="iconContainer">
             <i class="fa-solid fa-gem"></i>
           </div>
           <h3>Corporis voluptates officia eiusmod</h3>
-          <p>
-            Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris
-            nisi ut aliquip
-          </p>
+          <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
         </div>
-        <div class="cards">
+        <div class="cards reveal">
           <div class="iconContainer">
             <i class="fa-solid fa-inbox"></i>
           </div>
           <h3>Corporis voluptates officia eiusmod</h3>
-          <p>
-            Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris
-            nisi ut aliquip
-          </p>
+          <p>Consequuntur sunt aut quasi enim aliquam quae harum pariatur laboris nisi ut aliquip</p>
         </div>
       </div>
     </section>
-    <!--!STATS-->
+
     <section class="statistics">
       <div class="stats">
         <h2>232</h2>
@@ -185,67 +176,67 @@
         <p>Workers</p>
       </div>
     </section>
-    <!--!MENU-->
-    <section class="menu">
-      <div class="topMenu">
+
+    <section class="menu" id="menu">
+      <div class="topMenu reveal">
         <p class="miniMenu">OUR MENU</p>
         <h2>CHECK OUR <span class="red">YUMMY MENU</span></h2>
       </div>
       <div class="mainMenuSection">
         <div class="categories">
-          <div class="starters">Starters</div>
-          <div class="breakfast">Breakfast</div>
-          <div class="lunch">Lunch</div>
-          <div class="dinner">Dinner</div>
+          <div class="starters active" data-category="all">Starters</div>
+          <div class="breakfast" data-category="breakfast">Breakfast</div>
+          <div class="lunch" data-category="lunch">Lunch</div>
+          <div class="dinner" data-category="dinner">Dinner</div>
         </div>
         <div class="name">
           <p>MENU</p>
           <h2 class="categoriesName"><span>STARTERS</span></h2>
         </div>
         <div class="menuItems">
-          <div class="items breakfast">
+          <div class="items" data-category="breakfast">
             <div class="menuImg">
-              <img src="/public/images/menu/menu-item-1.png" alt="" />
+              <img src="/public/images/menu/menu-item-1.png" alt="menu item" loading="lazy" />
             </div>
             <h3 class="itemName">Magnam Tiste</h3>
             <p class="gray">Lorem, deren, trataro, filede, nerada</p>
             <p class="price red">$5.95</p>
           </div>
-          <div class="items breakfast">
+          <div class="items" data-category="breakfast">
             <div class="menuImg">
-              <img src="/public/images/menu/menu-item-2.png" alt="" />
+              <img src="/public/images/menu/menu-item-2.png" alt="menu item" loading="lazy" />
             </div>
             <h3 class="itemName">Aut Luia</h3>
             <p class="gray">Lorem, deren, trataro, filede, nerada</p>
             <p class="price red">$14.95</p>
           </div>
-          <div class="items lunch">
+          <div class="items" data-category="lunch">
             <div class="menuImg">
-              <img src="/public/images/menu/menu-item-3.png" alt="" />
+              <img src="/public/images/menu/menu-item-3.png" alt="menu item" loading="lazy" />
             </div>
             <h3 class="itemName">Est Eligendi</h3>
             <p class="gray">Lorem, deren, trataro, filede, nerada</p>
             <p class="price red">$8.95</p>
           </div>
-          <div class="items lunch">
+          <div class="items" data-category="lunch">
             <div class="menuImg">
-              <img src="/public/images/menu/menu-item-4.png" alt="" />
+              <img src="/public/images/menu/menu-item-4.png" alt="menu item" loading="lazy" />
             </div>
             <h3 class="itemName">Eos Luibusdam</h3>
             <p class="gray">Lorem, deren, trataro, filede, nerada</p>
             <p class="price red">$12.95</p>
           </div>
-          <div class="items dinner">
+          <div class="items" data-category="dinner">
             <div class="menuImg">
-              <img src="/public/images/menu/menu-item-5.png" alt="" />
+              <img src="/public/images/menu/menu-item-5.png" alt="menu item" loading="lazy" />
             </div>
             <h3 class="itemName">Eos Luibusdamaa</h3>
             <p class="gray">Lorem, deren, trataro, filede, nerada</p>
             <p class="price red">$23.95</p>
           </div>
-          <div class="items dinner">
+          <div class="items" data-category="dinner">
             <div class="menuImg">
-              <img src="/public/images/menu/menu-item-6.png" alt="" />
+              <img src="/public/images/menu/menu-item-6.png" alt="menu item" loading="lazy" />
             </div>
             <h3 class="itemName">Laboriosam Direva</h3>
             <p class="gray">Lorem, deren, trataro, filede, nerada</p>
@@ -254,11 +245,11 @@
         </div>
       </div>
     </section>
-    <!--!TESTIMONIALS-->
+
     <section class="testimonials">
-      <div class="topTest">
+      <div class="topTest reveal">
         <p class="miniTest">TESTIMONIALS</p>
-        <h2>WHAT ARE THEY<span class="red">SAYING ABOUT US</span></h2>
+        <h2>WHAT ARE THEY <span class="red">SAYING ABOUT US</span></h2>
       </div>
       <div class="container">
         <div class="content_container">
@@ -282,10 +273,7 @@
                 </div>
               </div>
               <div class="rightSlideContent">
-                <img
-                  src="/public/images/testimonials/testimonials-1.jpg"
-                  alt=""
-                />
+                <img src="/public/images/testimonials/testimonials-1.jpg" alt="testimonial" loading="lazy" />
               </div>
             </div>
             <div class="slide">
@@ -307,10 +295,7 @@
                 </div>
               </div>
               <div class="rightSlideContent">
-                <img
-                  src="/public/images/testimonials/testimonials-2.jpg"
-                  alt=""
-                />
+                <img src="/public/images/testimonials/testimonials-2.jpg" alt="testimonial" loading="lazy" />
               </div>
             </div>
             <div class="slide">
@@ -332,10 +317,7 @@
                 </div>
               </div>
               <div class="rightSlideContent">
-                <img
-                  src="/public/images/testimonials/testimonials-3.jpg"
-                  alt=""
-                />
+                <img src="/public/images/testimonials/testimonials-3.jpg" alt="testimonial" loading="lazy" />
               </div>
             </div>
             <div class="slide">
@@ -357,10 +339,7 @@
                 </div>
               </div>
               <div class="rightSlideContent">
-                <img
-                  src="/public/images/testimonials/testimonials-4.jpg"
-                  alt=""
-                />
+                <img src="/public/images/testimonials/testimonials-4.jpg" alt="testimonial" loading="lazy" />
               </div>
             </div>
           </div>
@@ -373,8 +352,8 @@
         </div>
       </div>
     </section>
-    <!--!EVENTS-->
-    <section class="events">
+
+    <section class="events" id="events">
       <div class="container">
         <div class="content_container">
           <div class="track">
@@ -424,30 +403,22 @@
         </div>
       </div>
     </section>
-    <!--!CHEFS-->
-    <section class="chefs">
-      <div class="topChef">
+
+    <section class="chefs" id="chefs">
+      <div class="topChef reveal">
         <p class="miniChef">CHEFS</p>
         <h2>OUR <span class="red">PROFESSIONAL CHEFS</span></h2>
       </div>
       <div class="chefCards">
         <div class="chefItems">
           <div class="chefPic">
-            <img src="/public/images/chefs/chefs-1.jpg" alt="" />
+            <img src="/public/images/chefs/chefs-1.jpg" alt="chef" loading="lazy" />
             <img src="/public/images/team-shape.svg" alt="" />
             <div class="socials">
-              <a href="https://x.com/">
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a href="https://facebook.com/">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="https://instagram.com/">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a href="https://www.linkedin.com/feed/">
-                <i class="fab fa-linkedin-in"></i>
-              </a>
+              <a href="https://x.com/"><i class="fab fa-twitter"></i></a>
+              <a href="https://facebook.com/"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://instagram.com/"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.linkedin.com/feed/"><i class="fab fa-linkedin-in"></i></a>
             </div>
           </div>
           <div class="chefInfo">
@@ -456,31 +427,19 @@
               <p>Master Chef</p>
             </div>
             <div class="chefDescription">
-              <p>
-                Velit aut quia fugit et et. Dolorum ea voluptate vel tempore
-                tenetur ipsa quae aut. Ipsum exercitationem iure minima enim
-                corporis et voluptate.
-              </p>
+              <p>Velit aut quia fugit et et. Dolorum ea voluptate vel tempore tenetur ipsa quae aut. Ipsum exercitationem iure minima enim corporis et voluptate.</p>
             </div>
           </div>
         </div>
         <div class="chefItems">
           <div class="chefPic">
-            <img src="/public/images/chefs/chefs-2.jpg" alt="" />
+            <img src="/public/images/chefs/chefs-2.jpg" alt="chef" loading="lazy" />
             <img src="/public/images/team-shape.svg" alt="" />
             <div class="socials">
-              <a href="https://x.com/">
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a href="https://facebook.com/">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="https://instagram.com/">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a href="https://www.linkedin.com/feed/">
-                <i class="fab fa-linkedin-in"></i>
-              </a>
+              <a href="https://x.com/"><i class="fab fa-twitter"></i></a>
+              <a href="https://facebook.com/"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://instagram.com/"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.linkedin.com/feed/"><i class="fab fa-linkedin-in"></i></a>
             </div>
           </div>
           <div class="chefInfo">
@@ -489,31 +448,19 @@
               <p>Patissier</p>
             </div>
             <div class="chefDescription">
-              <p>
-                Quo esse repellendus quia id. Est eum et accusantium pariatur
-                fugit nihil minima suscipit corporis. Voluptate sed quas
-                reiciendis animi neque sapiente.
-              </p>
+              <p>Quo esse repellendus quia id. Est eum et accusantium pariatur fugit nihil minima suscipit corporis. Voluptate sed quas reiciendis animi neque sapiente.</p>
             </div>
           </div>
         </div>
         <div class="chefItems">
           <div class="chefPic">
-            <img src="/public/images/chefs/chefs-3.jpg" alt="" />
+            <img src="/public/images/chefs/chefs-3.jpg" alt="chef" loading="lazy" />
             <img src="/public/images/team-shape.svg" alt="" />
             <div class="socials">
-              <a href="https://x.com/">
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a href="https://facebook.com/">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="https://instagram.com/">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a href="https://www.linkedin.com/feed/">
-                <i class="fab fa-linkedin-in"></i>
-              </a>
+              <a href="https://x.com/"><i class="fab fa-twitter"></i></a>
+              <a href="https://facebook.com/"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://instagram.com/"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.linkedin.com/feed/"><i class="fab fa-linkedin-in"></i></a>
             </div>
           </div>
           <div class="chefInfo">
@@ -522,77 +469,57 @@
               <p>Cook</p>
             </div>
             <div class="chefDescription">
-              <p>
-                Vero omnis enim consequatur. Voluptas consectetur unde qui
-                molestiae deserunt. Voluptates enim aut architecto porro
-                aspernatur molestiae modi.
-              </p>
+              <p>Vero omnis enim consequatur. Voluptas consectetur unde qui molestiae deserunt. Voluptates enim aut architecto porro aspernatur molestiae modi.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <!--!BookATable-->
+
     <section class="BookATable">
-      <div class="topBook">
+      <div class="topBook reveal">
         <p class="miniBook">BOOK A TABLE</p>
         <h2>BOOK YOUR <span class="red">STAY WITH US</span></h2>
       </div>
       <div class="mainBook">
         <div class="leftBook">
-          <img src="/public/images/reservation.jpg" alt="" />
+          <img src="/public/images/reservation.jpg" alt="reservation" loading="lazy" />
         </div>
         <div class="rightBook">
           <div class="firstFormRow">
-            <input type="text" placeholder="Name" />
-            <input type="email" placeholder="Email" />
-            <input type="Phone" placeholder="Phone" />
+            <input type="text" placeholder="Your Name" />
+            <input type="email" placeholder="Your Email" />
+            <input type="tel" placeholder="Your Phone" />
           </div>
           <div class="secondFormRow">
             <input type="date" />
             <input type="time" />
-            <input type="number" />
+            <input type="number" placeholder="People" min="1" />
           </div>
           <div class="thirdFormRow">
-            <textarea name="message" id="message"></textarea>
+            <textarea name="message" id="message" placeholder="Special requests..."></textarea>
           </div>
-          <a href="" class="bookingBtn red">Book a Table</a>
+          <a href="" class="bookingBtn">Book a Table</a>
         </div>
       </div>
     </section>
-    <!--!GALLERY-->
-    <section class="gallery">
-      <div class="topGallery">
-        <p class="miniGallery">BOOK A TABLE</p>
+
+    <section class="gallery" id="gallery">
+      <div class="topGallery reveal">
+        <p class="miniGallery">GALLERY</p>
         <h2>CHECK <span class="red">OUR GALLERY</span></h2>
       </div>
       <div class="container">
         <div class="content_container">
           <div class="track">
-            <div class="slide">
-              <img src="./public/images/gallery/gallery-1.jpg" alt="" />
-            </div>
-            <div class="slide">
-              <img src="./public/images/gallery/gallery-2.jpg" alt="" />
-            </div>
-            <div class="slide">
-              <img src="./public/images/gallery/gallery-3.jpg" alt="" />
-            </div>
-            <div class="slide">
-              <img src="./public/images/gallery/gallery-4.jpg" alt="" />
-            </div>
-            <div class="slide">
-              <img src="./public/images/gallery/gallery-5.jpg" alt="" />
-            </div>
-            <div class="slide">
-              <img src="./public/images/gallery/gallery-6.jpg" alt="" />
-            </div>
-            <div class="slide">
-              <img src="./public/images/gallery/gallery-7.jpg" alt="" />
-            </div>
-            <div class="slide">
-              <img src="./public/images/gallery/gallery-8.jpg" alt="" />
-            </div>
+            <div class="slide"><img src="./public/images/gallery/gallery-1.jpg" alt="gallery" loading="lazy" /></div>
+            <div class="slide"><img src="./public/images/gallery/gallery-2.jpg" alt="gallery" loading="lazy" /></div>
+            <div class="slide"><img src="./public/images/gallery/gallery-3.jpg" alt="gallery" loading="lazy" /></div>
+            <div class="slide"><img src="./public/images/gallery/gallery-4.jpg" alt="gallery" loading="lazy" /></div>
+            <div class="slide"><img src="./public/images/gallery/gallery-5.jpg" alt="gallery" loading="lazy" /></div>
+            <div class="slide"><img src="./public/images/gallery/gallery-6.jpg" alt="gallery" loading="lazy" /></div>
+            <div class="slide"><img src="./public/images/gallery/gallery-7.jpg" alt="gallery" loading="lazy" /></div>
+            <div class="slide"><img src="./public/images/gallery/gallery-8.jpg" alt="gallery" loading="lazy" /></div>
           </div>
           <div class="indicators">
             <div class="dot"></div>
@@ -607,9 +534,9 @@
         </div>
       </div>
     </section>
-    <!--!CONTACT-->
-    <section class="contact">
-      <div class="topContact">
+
+    <section class="contact" id="contact">
+      <div class="topContact reveal">
         <p class="miniContact">CONTACT</p>
         <h2>NEED HELP ? <span class="red">CONTACT US</span></h2>
       </div>
@@ -622,63 +549,49 @@
           allowfullscreen=""
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-        >
-        </iframe>
+        ></iframe>
       </div>
       <div class="infoCards">
         <div class="infoItems">
-          <div class="infoIconContainer">
-            <i class="fa-solid fa-location-dot"></i>
-          </div>
+          <div class="infoIconContainer"><i class="fa-solid fa-location-dot"></i></div>
           <div class="rightInfos">
             <p>Address</p>
-            <p>A108 Adam Street, New York,NY 535022</p>
+            <p>A108 Adam Street, New York, NY 535022</p>
           </div>
         </div>
         <div class="infoItems">
-          <div class="infoIconContainer">
-            <i class="fa-solid fa-phone-flip"></i>
-          </div>
+          <div class="infoIconContainer"><i class="fa-solid fa-phone-flip"></i></div>
           <div class="rightInfos">
             <p>Call us</p>
             <p>+1 5589 554488 55</p>
           </div>
         </div>
         <div class="infoItems">
-          <div class="infoIconContainer">
-            <i class="fa-regular fa-envelope"></i>
-          </div>
+          <div class="infoIconContainer"><i class="fa-regular fa-envelope"></i></div>
           <div class="rightInfos">
             <p>Email Us</p>
             <p>info@example.com</p>
           </div>
         </div>
         <div class="infoItems">
-          <div class="infoIconContainer">
-            <i class="fa-regular fa-clock"></i>
-          </div>
+          <div class="infoIconContainer"><i class="fa-regular fa-clock"></i></div>
           <div class="rightInfos">
             <p>Opening Hours</p>
-            <p>
-              <span class="black">Mon-Sat: </span> 11AM-23PM;<span class="black"
-                >Sunday :</span
-              >
-              Closed
-            </p>
+            <p><span class="black">Mon-Sat:</span> 11AM - 23PM &nbsp;<span class="black">Sunday:</span> Closed</p>
           </div>
         </div>
       </div>
       <div class="forms">
         <div class="firstRow">
-          <input type="text" class="nameInput" placeholder="name" />
-          <input type="text" class="emailINput" placeholder="email" />
+          <input type="text" class="nameInput" placeholder="Your Name" />
+          <input type="email" class="emailINput" placeholder="Your Email" />
         </div>
-        <input type="text" class="subjectInput" placeholder="subject" />
-        <textarea name="" id="" placeholder="message"></textarea>
-        <a href="" class="red sendBtn">Send Message</a>
+        <input type="text" class="subjectInput" placeholder="Subject" />
+        <textarea name="" id="" placeholder="Message"></textarea>
+        <button class="sendBtn">Send Message</button>
       </div>
     </section>
-    <!--!FOOTER-->
+
     <footer class="footer">
       <div class="footer-top">
         <div class="footer-col">
@@ -687,21 +600,18 @@
           <p>A108 Adam Street</p>
           <p>New York, NY 535022</p>
         </div>
-
         <div class="footer-col">
           <i class="fa-solid fa-phone-flip"></i>
           <h4>Contact</h4>
           <p><strong>Phone:</strong> +1 5589 55488 55</p>
           <p><strong>Email:</strong> info@example.com</p>
         </div>
-
         <div class="footer-col">
           <i class="fa-regular fa-clock"></i>
           <h4>Opening Hours</h4>
           <p><strong>Mon-Sat:</strong> 11AM - 23PM</p>
           <p><strong>Sunday:</strong> Closed</p>
         </div>
-
         <div class="footer-col">
           <h4>Follow Us</h4>
           <div class="social">
@@ -712,13 +622,12 @@
           </div>
         </div>
       </div>
-
       <div class="footer-bottom">
-        <p>© Copyright <strong>Delicious</strong> All Rights Reserved</p>
+        <p>© Copyright <strong>Yummy</strong> All Rights Reserved</p>
         <p>Designed by <a href="#">BootstrapMade</a></p>
       </div>
     </footer>
-    <!--!Modal section-->
+
     <div id="reservationModal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
@@ -726,9 +635,8 @@
         <form id="reservationForm">
           <div class="form-group">
             <label for="fullName">Full Name</label>
-            <input type="text" id="fullName" name="fullName" required />
+            <input type="text" id="fullName" name="fullName" placeholder="John Doe" required />
           </div>
-
           <div class="form-group">
             <label for="foodOption">Food Option</label>
             <select id="foodOption" name="foodOption" required>
@@ -738,33 +646,29 @@
               <option value="dinner">Dinner</option>
             </select>
           </div>
-
           <div class="form-group">
             <label for="startTime">Start Time</label>
             <input type="time" id="startTime" name="startTime" required />
           </div>
-
           <div class="form-group">
             <label for="endTime">End Time</label>
             <input type="time" id="endTime" name="endTime" required />
           </div>
-
           <div class="form-group">
             <label for="numPeople">Number of People</label>
-            <input
-              type="number"
-              id="numPeople"
-              name="numPeople"
-              min="1"
-              max="20"
-              required
-            />
+            <input type="number" id="numPeople" name="numPeople" min="1" max="20" placeholder="2" required />
           </div>
-
-          <button type="submit" class="submit-btn">Submit Reservation</button>
+          <button type="submit" class="submit-btn">Confirm Reservation</button>
         </form>
       </div>
     </div>
+
+    <div id="toastContainer"></div>
+
+    <button id="scrollTop" aria-label="Back to top">
+      <i class="fa-solid fa-chevron-up"></i>
+    </button>
+
     <script src="/public/js/main.js"></script>
     <script src="./public/js/responsivity.js"></script>
   </body>

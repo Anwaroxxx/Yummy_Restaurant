@@ -928,8 +928,7 @@ nav .hamburger.active span:nth-child(3) {
   color: #aaa;
   font-size: 14px;
   letter-spacing: 2px;
-  margin: 0;
-  margin-bottom: 10px;
+  margin: 0 0 10px;
 }
 .menu .topMenu h2 {
   font-size: 36px;
@@ -966,10 +965,6 @@ nav .hamburger.active span:nth-child(3) {
   color: rgb(207, 19, 19);
   border-bottom: 3px solid rgb(207, 19, 19);
 }
-.menu .mainMenuSection .categories div.starters {
-  color: rgb(207, 19, 19);
-  border-bottom: 3px solid rgb(207, 19, 19);
-}
 .menu .mainMenuSection .name {
   text-align: center;
   margin-bottom: 40px;
@@ -979,8 +974,7 @@ nav .hamburger.active span:nth-child(3) {
   color: #aaa;
   font-size: 12px;
   letter-spacing: 1px;
-  margin: 0;
-  margin-bottom: 5px;
+  margin: 0 0 5px;
 }
 .menu .mainMenuSection .name .categoriesName {
   font-size: 28px;
@@ -1003,7 +997,6 @@ nav .hamburger.active span:nth-child(3) {
   align-items: center;
   text-align: center;
   transition: transform 0.3s ease, opacity 0.3s ease;
-  opacity: 1;
   animation: fadeIn 0.5s ease;
 }
 .menu .mainMenuSection .menuItems .items:hover {
@@ -1035,15 +1028,13 @@ nav .hamburger.active span:nth-child(3) {
   font-size: 20px;
   font-weight: 600;
   color: #333;
-  margin: 0;
-  margin-bottom: 8px;
+  margin: 0 0 8px;
 }
 .menu .mainMenuSection .menuItems .items .gray {
   font-size: 14px;
   color: #999;
   font-style: italic;
-  margin: 0;
-  margin-bottom: 10px;
+  margin: 0 0 10px;
 }
 .menu .mainMenuSection .menuItems .items .price {
   font-size: 22px;
@@ -1093,12 +1084,6 @@ nav .hamburger.active span:nth-child(3) {
   .menu .mainMenuSection .menuItems .items .menuImg {
     height: 280px;
   }
-  .menu .mainMenuSection .menuItems .items .itemName {
-    font-size: 19px;
-  }
-  .menu .mainMenuSection .menuItems .items .price {
-    font-size: 20px;
-  }
 }
 @media (max-width: 600px) {
   .menu {
@@ -1114,26 +1099,25 @@ nav .hamburger.active span:nth-child(3) {
     font-size: 28px;
   }
   .menu .mainMenuSection .categories {
-    gap: 15px;
-    flex-wrap: wrap;
+    gap: 0;
+    flex-wrap: nowrap;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    justify-content: flex-start;
+    padding-bottom: 2px;
   }
   .menu .mainMenuSection .categories::-webkit-scrollbar {
     display: none;
   }
   .menu .mainMenuSection .categories div {
-    padding: 8px 15px;
+    padding: 8px 16px;
     font-size: 14px;
     white-space: nowrap;
     flex-shrink: 0;
   }
   .menu .mainMenuSection .name {
     margin-bottom: 30px;
-  }
-  .menu .mainMenuSection .name p {
-    font-size: 11px;
   }
   .menu .mainMenuSection .name .categoriesName {
     font-size: 24px;
@@ -1143,21 +1127,11 @@ nav .hamburger.active span:nth-child(3) {
     gap: 30px;
   }
   .menu .mainMenuSection .menuItems .items:hover {
-    transform: translateY(0);
+    transform: none;
   }
   .menu .mainMenuSection .menuItems .items .menuImg {
-    width: 100%;
     max-width: 100%;
     height: 250px;
-  }
-  .menu .mainMenuSection .menuItems .items .itemName {
-    font-size: 18px;
-  }
-  .menu .mainMenuSection .menuItems .items .gray {
-    font-size: 13px;
-  }
-  .menu .mainMenuSection .menuItems .items .price {
-    font-size: 20px;
   }
 }
 
@@ -1668,7 +1642,7 @@ nav .hamburger.active span:nth-child(3) {
 }
 
 .BookATable {
-  padding: 60px 200px;
+  padding: 60px 0px;
   background-color: #fff;
 }
 .BookATable .topBook {
@@ -2277,6 +2251,83 @@ nav .hamburger.active span:nth-child(3) {
 }
 .submit-btn:hover {
   background-color: #a00f0f;
+}
+
+#toastContainer {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.toast {
+  padding: 14px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  min-width: 260px;
+  max-width: 360px;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  pointer-events: all;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+.toast--success {
+  background: #27ae60;
+}
+.toast--error {
+  background: rgb(207, 19, 19);
+}
+
+#scrollTop {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 44px;
+  height: 44px;
+  background: rgb(207, 19, 19);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.3s ease, transform 0.3s ease, background 0.2s ease;
+  z-index: 998;
+  box-shadow: 0 4px 12px rgba(207, 19, 19, 0.4);
+}
+#scrollTop.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+#scrollTop:hover {
+  background: rgb(169.6300884956, 15.5699115044, 15.5699115044);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(207, 19, 19, 0.5);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /*# sourceMappingURL=app.css.map */
