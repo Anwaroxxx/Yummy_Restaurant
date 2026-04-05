@@ -1,0 +1,5 @@
+{
+  "buildCommand": "npm run sass:build",
+  "outputDirectory": "./",
+  "installCommand": "npm install"
+}

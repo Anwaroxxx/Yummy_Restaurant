@@ -1,0 +1,27 @@
+{
+  "name": "hehe",
+  "version": "1.0.0",
+  "description": "![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)\r ![SASS](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)\r ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)\r ![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)",
+  "main": "index.js",
+  "scripts": {
+    "sass:watch": "sass --watch src/sass/app.scss:public/css/app.css",
+    "sass:build": "sass src/sass/app.scss:public/css/app.css",
+    "build": "npm run sass:build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anwaroxxx/Anwar_Azarzou_FinalProject_DOM.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Anwaroxxx/Anwar_Azarzou_FinalProject_DOM/issues"
+  },
+  "homepage": "https://github.com/Anwaroxxx/Anwar_Azarzou_FinalProject_DOM#readme",
+  "devDependencies": {
+    "sass": "^1.99.0"
+  }
+}
